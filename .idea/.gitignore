@@ -1,0 +1,13 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+/adventOfCode.iml
+/misc.xml
+/modules.xml
+/vcs.xml
+# Datasource local storage ignored files
+/../../../../../../../:\Users\PC Sergio\OneDrive\CODE\adventOfCode\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+
