@@ -5,6 +5,7 @@
 /misc.xml
 /modules.xml
 /vcs.xml
+/uiDesigner.xml
 # Datasource local storage ignored files
 /../../../../../../../:\Users\PC Sergio\OneDrive\CODE\adventOfCode\.idea/dataSources/
 /dataSources.local.xml
