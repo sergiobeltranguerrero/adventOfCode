@@ -11,5 +11,10 @@ public class Main {
         Day2 day2 = new Day2("resources/Day2.txt");
         System.out.println(day2.part0());
         System.out.println(day2.part1());
+
+        /*DAY3*/
+        Day3 day3 = new Day3("resources/Day3.txt");
+        System.out.println(day3.part0());
+        System.out.println(day3.part1());
     }
 }
