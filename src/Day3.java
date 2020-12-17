@@ -7,40 +7,49 @@ import java.util.List;
 
 public class Day3 {
     List<String> input;
+
     public Day3(String path) throws IOException {
         File file = new File(path);
         readFile(file);
     }
 
     private void readFile(File file) throws IOException {
-        BufferedReader reader    = new BufferedReader(new FileReader(file));
-        List<String>   map = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        List<String>   map    = new ArrayList<>();
         while (reader.ready()) {
-            String line = reader.readLine();
+            String line = reader.readLine().replace(" ", "");
             map.add(line);
         }
         this.input = map;
     }
 
-    private int part0(int numRows, int numCols) {
-        int counter = 0;
-        int row = numRows;
-        int col = numCols;
-        while (row < input.size()) {
-            char currentChar = input.get(row).charAt(col);
-            if (currentChar == '#') {
-                counter += 1;
+    private long numTrees(int x, int y) {
+        long numTrees = 0;
+
+        for (int i = 0; i < input.size(); i += y) {
+            int currentX = i * x;
+            int adjustedX = currentX % input.get(i).length();
+
+            if (input.get(i).charAt(adjustedX) == '#') {
+                numTrees += 1;
             }
-            col = (col + numCols) % input.get(row).length();
-            row = row + numRows;
         }
-        return counter;
+        System.out.println(numTrees);
+        return numTrees;
     }
 
-    public int part0() {
-        return part0(1, 3);
+    public long part0() {
+        return numTrees(3, 1);
     }
-    public int part1() {
-        return part0(1, 1) * part0(1, 3) * part0(1, 5) * part0(1, 7) * part0(2, 1);
+
+    public long part1() {
+        long numTrees = 1;
+        numTrees *= numTrees(1, 1);
+        numTrees *= numTrees(3, 1);
+        numTrees *= numTrees(5, 1);
+        numTrees *= numTrees(7, 1);
+        numTrees *= numTrees(1, 2);
+        return numTrees;
+
     }
 }
