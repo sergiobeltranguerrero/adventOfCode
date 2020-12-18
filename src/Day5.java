@@ -73,4 +73,27 @@ public class Day5 {
         }
         throw new IllegalAccessException("There is a problem :(");
     }
+
+    public int part1() throws IllegalAccessException {
+        List<Integer> allID = calculateAllIDs();
+        for (String boardingPass : boardingPasses) {
+            String  rows   = boardingPass.substring(0, 7);
+            String  cols   = boardingPass.substring(7, 10);
+            Integer numRow = getRow(rows, 0, 127);
+            Integer numCol = getCol(cols, 0, 7);
+            Integer seatID = (numRow * 8) + numCol;
+            allID.remove(seatID);
+        }
+        return allID.get(0);
+    }
+
+    private List<Integer> calculateAllIDs() {
+        List<Integer> IDs = new ArrayList<>();
+        for (int row = 12; row <= 115; row += 1) {
+            for (int col = 1; col <= 7; col += 1) {
+                IDs.add((row * 8) + col);
+            }
+        }
+        return IDs;
+    }
 }
