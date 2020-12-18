@@ -23,9 +23,10 @@ public class Day4 {
             if (line.isEmpty()) {
                 this.passports.add(passport.toString());
                 passport = new StringBuilder();
+            } else {
+                line += (" ");
+                passport.append(line);
             }
-            line += (" ");
-            passport.append(line);
         }
         this.passports.add(passport.toString());
     }
@@ -58,26 +59,28 @@ public class Day4 {
     public int part1() {
         int validPassports = 0;
         for (String passport : passports) {
-            String[]     requiredFields = passport.split(" ");
-            List<String> keys           = new ArrayList<>();
-            boolean      isValid        = true;
-            int i = 0;
+            String[] requiredFields = passport.split(" ");
+            List<String> keys       = new ArrayList<>();
+            boolean  isValid        = true;
+            int      i              = 0;
             while (isValid && i < requiredFields.length) {
-                String key = requiredFields[i].split(":")[0];
+                String[] passportSequence = requiredFields[i].split(":");
+                String   key              = passportSequence[0].strip();
+                String   value            = passportSequence[1].strip();
                 keys.add(key);
-                String value = requiredFields[i].split(":")[1];
                 isValid = validate(key, value);
                 i += 1;
             }
             isValid = isValid && isValid(keys);
             if (isValid) {
                 validPassports += 1;
+
             }
         }
         return validPassports;
     }
 
-    private boolean validate(String key, String value) {
+    public boolean validate(String key, String value) {
         switch (key) {
             case "byr":
                 int birthYear = Integer.parseInt(value);
@@ -100,17 +103,18 @@ public class Day4 {
                 return false;
             case "hcl":
                 if (value.length() == 7 && value.charAt(0) == '#') {
-                    if (!value.contains(invalidCharactersInHcl)) {
+                    if (value.matches("#[0-9a-f]{6}")) {
                         return true;
                     }
                 }
-                break;
             case "ecl":
-
-                break;
+                if (List.of("amb", "blu", "brn", "gry", "grn", "hzl", "oth").contains(value)) {
+                    return true;
+                }
             case "pid":
-
-                break;
+                return value.length() == 9;
+            case "cid":
+                return true;
         }
         return false;
     }
