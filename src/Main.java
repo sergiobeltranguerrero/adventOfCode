@@ -33,6 +33,10 @@ public class Main {
         System.out.println(day6.part1());*/
 
         /*DAY7*/
+
+        /*DAY8*/
+        Day8 day8 = new Day8("resources/Day8.txt");
+        System.out.println(day8.part0());
     }
 }
 
